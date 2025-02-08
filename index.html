@@ -17,6 +17,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            flex-direction: column;
         }
 
         .container {
@@ -68,7 +69,7 @@
             transform: scale(1.1);
         }
 
-        #loveMessage {
+        #loveMessage, .no-message {
             display: none;
             font-size: 2em;
             color: #e60073;
@@ -120,10 +121,7 @@
             h1 {
                 font-size: 2em;
             }
-            p {
-                font-size: 1em;
-            }
-            button {
+            p, button {
                 font-size: 1.1em;
                 padding: 10px 20px;
             }
@@ -137,28 +135,24 @@
         <h1>Will You Be Mine Forever? 💖</h1>
         <p>Life feels like a beautiful song when you're with me. Will you make it eternal? 🌹</p>
         <button id="yes" onclick="showLove()">Yes 💕</button>
-        <button id="no" onmouseover="moveNoButton()">No 🙈</button>
+        <button id="no" onclick="handleNoClick()">No 🙈</button>
 
         <div id="loveMessage">I Love You ❤️</div>
     </div>
 
     <script>
         function showLove() {
+            document.getElementById('loveMessage').textContent = 'You are mine forever now! ❤️';
             document.getElementById('loveMessage').style.display = 'block';
+            document.querySelectorAll('.no-message').forEach(msg => msg.remove());
         }
 
-        function moveNoButton() {
-            const noButton = document.getElementById('no');
-            const x = Math.random() * (window.innerWidth - noButton.offsetWidth);
-            const y = Math.random() * (window.innerHeight - noButton.offsetHeight);
-
-            noButton.style.position = 'absolute';
-            noButton.style.left = `${x}px`;
-            noButton.style.top = `${y}px`;
-
-            setTimeout(() => {
-                document.getElementById('loveMessage').style.display = 'block';
-            }, 5000);
+        function handleNoClick() {
+            const message = document.createElement('div');
+            message.classList.add('no-message');
+            message.textContent = 'Why not? Try Considering Yes! 💭';
+            document.body.appendChild(message);
+            message.style.display = 'block';
         }
 
         // Heart floating animation
